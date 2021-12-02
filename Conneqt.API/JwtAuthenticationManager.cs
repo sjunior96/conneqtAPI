@@ -42,7 +42,7 @@ namespace Conneqt.API
             var securityToken = jwtSecurityTokenHandler.CreateToken(securityTokenDescriptor);
             var token = jwtSecurityTokenHandler.WriteToken(securityToken);
 
-            return new JwtAuthResponse(user.CompanyName, user.Segment, user.NumberOfUsers, user.FullName, user.Email, user.Telephone, user.Password)
+            return new JwtAuthResponse(user.CompanyName, user.Segment, user.NumberOfUsers, user.FullName, user.Email, user.Telephone, "")
             {
                 token = token,
                 expiresIn = (int)tokenExpireTimeStamp.Subtract(DateTime.Now).TotalSeconds,
