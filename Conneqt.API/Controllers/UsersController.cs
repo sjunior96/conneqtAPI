@@ -58,5 +58,20 @@ namespace Conneqt.API.Controllers
 
             return Created("", user);
         }
+
+        [HttpPost]
+        [Route("Login")]
+        public IActionResult Login([FromBody] AuthenticationRequest authenticationRequest)
+        {
+            var jwtAuthenticationManager = new JwtAuthenticationManager(_userRepository);
+            var authResult = jwtAuthenticationManager.Authenticate(authenticationRequest.Email, authenticationRequest.Password);
+
+            if(authResult == null)
+            {
+                return Unauthorized();
+            }
+
+            return Ok(authResult);
+        }
     }
 }
